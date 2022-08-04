@@ -38,6 +38,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     working_dir = os.path.abspath(os.getcwd())
+    if not os.path.exists(working_dir + "/temp_storage"):
+        subprocess.run('mkdir temp_storage', shell=True)
 
     if args.upload and args.google and args.dir:
         path = args.upload
