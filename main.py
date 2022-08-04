@@ -7,23 +7,21 @@ from backups import googledrive
 def upload_single(working_dir: str, path: str):
     """move file to upload, upload and delete"""
     print("cp " + path, working_dir)
-    subprocess.call(f'cp "{path}" {working_dir}', shell=True)
+    subprocess.call(f'cp "{path}" {working_dir}/temp_storage', shell=True)
     file = path.split('/')[-1]
-    drive = googledrive.googledrive(file)
+    drive = googledrive.googledrive("temp_storage/" + file)
     drive.upload_basic()
-    subprocess.call(f'rm {working_dir}/{file}', shell=True)
+    subprocess.call(f'rm "{working_dir}/temp_storage/{file}"', shell=True)
     print("Uploaded " + path + " to googledrive")
     return
 
 
 def upload_dir(working_dir: str, path: str):
     for file in os.listdir(path):
-        print(f'{path}/{file}')
-        subprocess.call(f'cp "{path}/{file}" "{working_dir}"', shell=True)
-        drive = googledrive.googledrive(file)
+        subprocess.call(f'cp "{path}/{file}" {working_dir}/temp_storage', shell=True)
+        drive = googledrive.googledrive("temp_storage/" + file)
         drive.upload_basic()
-        subprocess.call(f'rm "{working_dir}/{file}"', shell=True)
-
+        subprocess.call(f'rm "{working_dir}/temp_storage/{file}"', shell=True)
         print("Uploaded " + file + " to googledrive")
     return
 
