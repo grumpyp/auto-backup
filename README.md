@@ -6,7 +6,7 @@ Python project to safe/backup files and whole directories on remote storages
 ## Available backups
 - [x]  Googledrive
 - [ ]  SSH
-- [ ]  FTP
+- [x]  FTP
 
 ## Setup
 
