@@ -1,4 +1,3 @@
-import sys
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
@@ -6,10 +5,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 import settings
 import logging
 import datetime
-sys.path.append(".")
 
 
-class googledrive():
+class Googledrive():
 
     def __init__(self, filename: str = "", uploadpath: str = "") -> None:
         self.filename = filename
@@ -50,5 +48,5 @@ class googledrive():
 
 
 if __name__ == '__main__':
-    drive = googledrive("test")
+    drive = Googledrive("test")
     drive.upload_basic()
