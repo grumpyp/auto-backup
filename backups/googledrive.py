@@ -34,7 +34,7 @@ class googledrive():
             # create drive api client
             service = build('drive', 'v3', credentials=self.creds)
 
-            file_metadata = {'name': f'{self.filename}',
+            file_metadata = {'name': f'{self.filename.split("/")[1]}',
                              'parents': [f'{self.parent_folder}']}
 
             media = MediaFileUpload(self.filename)
