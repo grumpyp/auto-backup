@@ -26,6 +26,8 @@ to upload the whole directory: `python3 main.py --upload /Users/foo/Documents/Sk
 
 to upload a single file `python3 main.py --upload "/Users/foo/Documents/Skydive/Me.jpeg" -google`
 
+to see the last 20 logs (only successful uploads and errors) in console `python3 main.py -logs`
+
 
 
 ### Googledrive Setup

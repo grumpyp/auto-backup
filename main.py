@@ -47,6 +47,9 @@ if __name__ == "__main__":
     parser.add_argument('-dir', help="Uploads the whole directory",
                         required=False, action='store_true')
 
+    parser.add_argument('-logs', help="Show upload logs",
+                        required=False, action='store_true')
+
     args = parser.parse_args()
     working_dir = os.path.abspath(os.getcwd())
     if not os.path.exists(working_dir + "/temp_storage"):
@@ -68,3 +71,14 @@ if __name__ == "__main__":
         path = args.upload
         upload_single(working_dir, path, 'ftp')
 
+    elif args.logs:
+        try:
+            print("\n")
+            for n, log in enumerate(reversed(open('logs.log', 'r+').readlines())):
+                if "ERROR" in log or "WARNING" in log:
+                    print(log)
+                    if n > 20:
+                        break
+            print("To see all logs open logs.log")
+        except Exception as e:
+            print(f"No logs saved: {e}")
