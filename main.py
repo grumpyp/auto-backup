@@ -34,6 +34,16 @@ def upload_dir(working_dir: str, path: str, storage: str):
     return
 
 
+def compress(working_dir: str, path: str):
+    try:
+        commands = f"""
+                    cd {working_dir}/temp_storage
+                    bash create_compressed.sh {path}
+        """
+        subprocess.call(commands, shell=True)
+    except Exception as e:
+        print(e)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--upload', help="path to file/dir")
@@ -50,25 +60,33 @@ if __name__ == "__main__":
     parser.add_argument('-logs', help="Show upload logs",
                         required=False, action='store_true')
 
+    parser.add_argument('-compress', help="Compressed a file/path",
+                        required=False, action='store_true')
+
     args = parser.parse_args()
+    path = args.upload
     working_dir = os.path.abspath(os.getcwd())
     if not os.path.exists(working_dir + "/temp_storage"):
         subprocess.run('mkdir temp_storage', shell=True)
 
-    if args.upload and args.google and args.dir:
-        path = args.upload
+    elif args.upload and args.google and args.dir:
+        if args.compress:
+            compress(working_dir, path)
         upload_dir(working_dir, path, 'google')
 
     elif args.upload and args.ftp and args.dir:
-        path = args.upload
+        if args.compress:
+        
         upload_dir(working_dir, path, 'ftp')
 
     elif args.upload and args.google:
-        path = args.upload
+        if args.compress:
+        
         upload_single(working_dir, path, 'google')
 
     elif args.upload and args.ftp:
-        path = args.upload
+        if args.compress:
+        
         upload_single(working_dir, path, 'ftp')
 
     elif args.logs:
