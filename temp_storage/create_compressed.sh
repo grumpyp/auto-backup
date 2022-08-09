@@ -9,4 +9,4 @@ case "$OSTYPE" in
   msys*)    tar -czf $(date +%Y-%m-%d_%H%M%S)_backup.tgz $1 2>/dev/null ;;
 esac
 
-echo $(date +%Y-%m-%d_%H%M%S)_backup.tgz
+echo $(date +%Y-%m-%d_%H%M%S)_backup.tgz created
