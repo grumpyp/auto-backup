@@ -30,7 +30,21 @@ to see the last 20 logs (only successful uploads and errors) in console `python3
 
 to compress a file or directory `python3 main.py --upload "/Users/foo/Documents/Skydive/Me.jpeg" -compress`
 
+## Terminal usage
 
+As there is no official pypi package yet, you can add an alias to your `shell`.
+
+Steps in the Mac console:
+
+1. `vim ~/.zshrc`
+2. add 
+`# auto-backup`
+`alias autobackup="<yourpythonexecution> /Users/path/to/file/auto-backup/main.py"`
+
+f.e. like this `alias autobackup="python3 /Users/px/Documents/GitHub/auto-backup/main.py"`
+
+from there on you can execute everything like this: f.e. 
+`autobackup --upload "/Users/foo/Documents/Skydive/Me.jpeg" -ftp`
 
 ### Googledrive Setup
 
