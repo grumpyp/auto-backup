@@ -40,6 +40,7 @@ def compress(working_dir: str, path: str):
                     cd {working_dir}/temp_storage
                     bash create_compressed.sh {path}
         """
+        print(path)
         subprocess.call(commands, shell=True)
     except Exception as e:
         print(e)
@@ -69,24 +70,19 @@ if __name__ == "__main__":
     if not os.path.exists(working_dir + "/temp_storage"):
         subprocess.run('mkdir temp_storage', shell=True)
 
+    if args.compress:
+        compress(working_dir, path)
+
     elif args.upload and args.google and args.dir:
-        if args.compress:
-            compress(working_dir, path)
         upload_dir(working_dir, path, 'google')
 
     elif args.upload and args.ftp and args.dir:
-        if args.compress:
-        
         upload_dir(working_dir, path, 'ftp')
 
     elif args.upload and args.google:
-        if args.compress:
-        
         upload_single(working_dir, path, 'google')
 
     elif args.upload and args.ftp:
-        if args.compress:
-        
         upload_single(working_dir, path, 'ftp')
 
     elif args.logs:

@@ -28,6 +28,8 @@ to upload a single file `python3 main.py --upload "/Users/foo/Documents/Skydive/
 
 to see the last 20 logs (only successful uploads and errors) in console `python3 main.py -logs`
 
+to compress a file or directory `python3 main.py --upload "/Users/foo/Documents/Skydive/Me.jpeg" -compress`
+
 
 
 ### Googledrive Setup
@@ -46,6 +48,7 @@ Fork it and create a PR.
 
 ### Idea's to build
 
+- [x]  create bash script to compress directories or files
 - [ ]  command to create and edit a cronjob (auto-backup)
 - [ ]  different backups like dropbox, Applecloud, Onedrive,..
 - [ ]  You have a good future idea? -> Create an issue!
