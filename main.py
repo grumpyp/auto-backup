@@ -6,7 +6,6 @@ from backups import googledrive, ftp
 
 def upload_single(working_dir: str, path: str, storage: str):
     """move file to upload, upload and delete"""
-    print("cp " + path, working_dir)
     subprocess.call(f'cp "{path}" {working_dir}/temp_storage', shell=True)
     file = path.split('/')[-1]
     if storage == "google":
@@ -41,7 +40,10 @@ def compress(working_dir: str, path: str):
                     bash create_compressed.sh {path}
         """
         print(path)
-        subprocess.call(commands, shell=True)
+        compress_file = subprocess.run(commands, shell=True, capture_output=True)
+        compressed_file_name = compress_file.stdout.decode('utf-8').split(" ")[0]
+        return compressed_file_name
+
     except Exception as e:
         print(e)
 
@@ -71,7 +73,12 @@ if __name__ == "__main__":
         subprocess.run('mkdir temp_storage', shell=True)
 
     if args.compress:
-        compress(working_dir, path)
+        compressed_filename = compress(working_dir, path)
+        if args.google:
+            print(working_dir, compressed_filename)
+            upload_single(working_dir, compressed_filename, 'google')
+        elif args.ftp:
+            upload_single(working_dir, compressed_filename, 'ftp')
 
     elif args.upload and args.google and args.dir:
         upload_dir(working_dir, path, 'google')
