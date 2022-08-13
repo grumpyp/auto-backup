@@ -21,15 +21,7 @@ def upload_single(working_dir: str, path: str, storage: str):
 
 def upload_dir(working_dir: str, path: str, storage: str):
     for file in os.listdir(path):
-        subprocess.call(f'cp "{path}/{file}" {working_dir}/temp_storage', shell=True)
-        if storage == "google":
-            drive = googledrive.Googledrive("temp_storage/" + file)
-            drive.upload_basic()
-        elif storage == "ftp":
-            ftpstorage = ftp.Ftp("temp_storage/" + file)
-            ftpstorage.upload_basic()
-        subprocess.call(f'rm "{working_dir}/temp_storage/{file}"', shell=True)
-        print("Uploaded " + file + " to " + storage)
+        upload_single(working_dir, "{path}/{file}", storage)
     return
 
 
@@ -69,28 +61,27 @@ if __name__ == "__main__":
     args = parser.parse_args()
     path = args.upload
     working_dir = os.path.abspath(os.getcwd())
+
+    storage = ""
+    if args.google:
+        storage = "google"
+    if args.ftp:
+        storage = "ftp"
+
+
     if not os.path.exists(working_dir + "/temp_storage"):
         subprocess.run('mkdir temp_storage', shell=True)
 
     if args.compress:
         compressed_filename = compress(working_dir, path)
-        if args.google:
-            print(working_dir, compressed_filename)
-            upload_single(working_dir, compressed_filename, 'google')
-        elif args.ftp:
-            upload_single(working_dir, compressed_filename, 'ftp')
+        upload_single(working_dir, compressed_filename, storage)
+       
 
-    elif args.upload and args.google and args.dir:
-        upload_dir(working_dir, path, 'google')
+    elif args.upload 
+        upload_func = upload_dir if  args.dir else upload_single
+        upload_dir(working_dir, path, storage)
 
-    elif args.upload and args.ftp and args.dir:
-        upload_dir(working_dir, path, 'ftp')
 
-    elif args.upload and args.google:
-        upload_single(working_dir, path, 'google')
-
-    elif args.upload and args.ftp:
-        upload_single(working_dir, path, 'ftp')
 
     elif args.logs:
         try:
