@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/Users/patrickgerard/Documents/GitHub/auto-backup')
 import settings
 import logging
 import datetime
@@ -19,6 +21,7 @@ class Ftp():
             logging.info('FTP backer started')
         except Exception as e:
             logging.error(f'Error trying to connect with FTP: {e}')
+        print(self.connection.pwd())
 
     def upload_basic(self):
         """
@@ -59,4 +62,5 @@ class Ftp():
 if __name__ == "__main__":
     ftpcon = Ftp()
     # ftpcon.basic_upload()
-    ftpcon.create_dir()
+    print(ftpcon)
+    # ftpcon.create_dir()

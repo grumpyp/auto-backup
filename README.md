@@ -30,6 +30,12 @@ to see the last 20 logs (only successful uploads and errors) in console `python3
 
 to compress a file or directory `python3 main.py --upload "/Users/foo/Documents/Skydive/Me.jpeg" -compress`
 
+to setup a cronjob `python3 main.py --upload "/Users/foo/Documents/Skydive/Me.jpeg" -ftp --cron add`
+
+to view all running cronjobs `python3 main.py --upload "/Users/foo/Documents/Skydive/Me.jpeg" -ftp --cron show`
+
+> You can delete all cronjobs with the following command in your terminal `crontab -r`
+
 ## Terminal usage
 
 As there is no official pypi package yet, you can add an alias to your `shell`.
@@ -53,6 +59,16 @@ To use the Googledrive API you have to follow these steps:
 https://developers.google.com/drive/api/guides/enable-drive-api
 
 after activating the drive API, you must add the e-mail from your service to a Googledrive folder in which you'll also backup all the stuff.
+
+### Cronjob Setup
+
+To use the cronjob feature you'd need to specifiy your Python path and change it in the line 25 of `cronjobs.py`
+
+`/opt/homebrew/bin/python3.9` is the sample path. 
+
+For my `macOS` to be precice `Big Sur`, I had to give `cron` some rights. The following tutorial made it work.
+
+https://www.bejarano.io/fixing-cron-jobs-in-mojave/
 
 
 ## Feature Dev and Contributions

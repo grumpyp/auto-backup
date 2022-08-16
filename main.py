@@ -1,6 +1,7 @@
 import argparse
 import subprocess
 import os
+import cronjobs
 from backups import googledrive, ftp
 
 
@@ -66,16 +67,29 @@ if __name__ == "__main__":
     parser.add_argument('-compress', help="Compressed a file/path",
                         required=False, action='store_true')
 
+    parser.add_argument('--cron', help='Cronjob commands', required=False)
+
     args = parser.parse_args()
+    cronjob = args.cron
+
     path = args.upload
     working_dir = os.path.abspath(os.getcwd())
     if not os.path.exists(working_dir + "/temp_storage"):
         subprocess.run('mkdir temp_storage', shell=True)
 
+    uploadfunc = upload_dir if args.dir else upload_single
+
+    if cronjob:
+        cron = cronjobs.Croncontroller()
+        if cronjob == "add":
+            cron.add_daily('--upload "/Users/grumpyp/Documents/GitHub/auto-backup/logs.log" -ftp')
+        if cronjob == "show":
+            print("Running Cronjobs: ")
+            print(cron.show_jobs(cron))
+
     if args.compress:
         compressed_filename = compress(working_dir, path)
         if args.google:
-            print(working_dir, compressed_filename)
             upload_single(working_dir, compressed_filename, 'google')
         elif args.ftp:
             upload_single(working_dir, compressed_filename, 'ftp')
