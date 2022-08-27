@@ -79,8 +79,8 @@ Fork it and create a PR.
 ### Idea's to build
 
 - [x]  create bash script to compress directories or files
-- [ ]  command to create and edit a cronjob (auto-backup)
+- [ ]  ~command to create~, edit a cronjob (auto-backup)
 - [ ]  different backups like dropbox, Applecloud, Onedrive,..
 - [ ]  Return a link to send the link to other people to easily download the file / dir which got uploaded
-- [ ]  Create whole management tool for all backups f.e. with Flask
+- [ ]  Create whole management tool for all backups f.e. with Flask (WIP)
 - [ ]  You have a good future idea? -> Create an issue!

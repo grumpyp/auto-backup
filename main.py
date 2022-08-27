@@ -1,8 +1,12 @@
 import argparse
 import subprocess
 import os
+from threading import Thread
+from time import sleep
+
 import cronjobs
 from backups import googledrive, ftp
+
 
 
 def upload_single(working_dir: str, path: str, storage: str):
@@ -48,7 +52,13 @@ def compress(working_dir: str, path: str):
     except Exception as e:
         print(e)
 
+def _server(c):
+    from server import main
+    main.start()
+
+
 if __name__ == "__main__":
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--upload', help="path to file/dir")
 
@@ -117,3 +127,5 @@ if __name__ == "__main__":
             print("To see all logs open logs.log")
         except Exception as e:
             print(f"No logs saved: {e}")
+    
+    serv = Thread(target=_server, args=[5]).start()
