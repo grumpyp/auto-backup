@@ -1,4 +1,7 @@
 from flask import Flask
+import logging
+log = logging.getLogger('werkzeug')
+log.disabled = True
 
 def start():
     import sys
