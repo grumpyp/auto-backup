@@ -16,18 +16,18 @@ def start():
 
     @app.route("/")
     def hello_world():
-        dates = []
+        timestamps = []
         log_type = []
         msgs = []
-        data = {'dates': dates, 'log_types': log_type, 'msgs': msgs}
+        data = {'timestamps': timestamps, 'log_types': log_type, 'msgs': msgs}
         with open('./logs.log', 'r+') as logs:
             for line in logs.readlines():
-                date, status, msg = line.split(' - ')[0], line.split(' - ')[1], line.split(' - ')[2]
-                dates.append(date)
+                timestamp, status, msg = line.split(' - ')[0], line.split(' - ')[1], line.split(' - ')[2]
+                timestamps.append(timestamp)
                 log_type.append(status)
                 msgs.append(msg)
         
-        print(dates)
+        print(timestamps)
         print(log_type)
         print(msgs)
 
