@@ -16,21 +16,20 @@ def start():
 
     @app.route("/")
     def hello_world():
-        timestamps = []
-        log_type = []
-        msgs = []
-        data = {'timestamps': timestamps, 'log_types': log_type, 'msgs': msgs}
+        data = dict()
         with open('./logs.log', 'r+') as logs:
-            for line in logs.readlines():
+            for n, line in enumerate(logs.readlines()):
                 timestamp, status, msg = line.split(' - ')[0], line.split(' - ')[1], line.split(' - ')[2]
-                timestamps.append(timestamp)
-                log_type.append(status)
-                msgs.append(msg)
-        
-        print(timestamps)
-        print(log_type)
-        print(msgs)
+                if status == 'WARNING':
+                    if "Googledrive" in msg:
+                        # improvement: create ahref to googledrive to view with
+                        # https://drive.google.com/file/d/<id>/view
+                        file_id = msg.split('ID: ')[1]
+                        data[n] = [timestamp, status, msg]
+                    else:
+                        data[n] = [timestamp, status, msg]
 
+                pass
         return render_template('index.html', data=data)
 
 

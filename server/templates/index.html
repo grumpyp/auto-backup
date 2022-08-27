@@ -15,12 +15,28 @@ body {
 }
 
 #latest {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 #data {
-    padding-top: 10%;
+    padding-top: 50px;
 }
+
+.data-table {
+    text-align: center;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 1000px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.data-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+}
+
 
 </style>
 <body>
@@ -29,7 +45,34 @@ body {
 <div id="latest"><h2>Your latest backup: </h2></div>
 <div id="data">
    
-    {{ data }}
+    <center><table class="data-table">
+        <thead>
+            <tr>
+            <th>timestamp</th>
+            <th>action</th>
+            <th>details</th>
+            </tr>
+        </thead>
+        <tr>
+            <td><b>-------</b></td>
+            <td><b>-------</b></td>
+            <td><b>-------</b></td>
+        </tr>
+        <tbody>
+        {% for entry in  data.values() %}
+        <tr>
+            {% for e in entry %}
+            <td>{{ e }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td><b>-------</b></td>
+            <td><b>-------</b></td>
+            <td><b>-------</b></td>
+        </tr>
+        {% endfor %}
+
+    </table></center>
 
 </div>
 
