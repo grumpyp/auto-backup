@@ -1,12 +1,13 @@
 from flask import Flask, render_template
 import logging
+import sys
+import click
+
 log = logging.getLogger('werkzeug')
 log.disabled = True
 
 def start():
-    import sys
-    import click
-
+    
     cli = sys.modules['flask.cli']
 
     # put your own message here
@@ -15,8 +16,8 @@ def start():
     app = Flask(__name__)
 
     @app.route("/")
-    def hello_world():
-        data = dict()
+    def logging_management():
+        data = {}
         with open('./logs.log', 'r+') as logs:
             for n, line in enumerate(logs.readlines()):
                 timestamp, status, msg = line.split(' - ')[0], line.split(' - ')[1], line.split(' - ')[2]
@@ -32,5 +33,5 @@ def start():
                 pass
         return render_template('index.html', data=data)
 
-
-    app.run(host='0.0.0.0', port='80')
+    
+    app.run(host='0.0.0.0', port='5000')

@@ -56,6 +56,9 @@ def _server(c):
     from server import main
     main.start()
 
+def ngrok():
+    subprocess.call('ngrok http 5000', shell=True)
+
 
 if __name__ == "__main__":
 
@@ -128,4 +131,8 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"No logs saved: {e}")
     
+    # current problem: when uploading another file, another Thread of expose will be started 
+    # free version is limited to 1
+    # it keeps working but Exceptions show up
     serv = Thread(target=_server, args=[5]).start()
+    expose = Thread(target=ngrok).start()
