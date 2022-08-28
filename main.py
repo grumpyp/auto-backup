@@ -135,4 +135,4 @@ if __name__ == "__main__":
     # free version is limited to 1
     # it keeps working but Exceptions show up
     serv = Thread(target=_server, args=[5]).start()
-    expose = Thread(target=ngrok).start()
+    # expose = Thread(target=ngrok).start()

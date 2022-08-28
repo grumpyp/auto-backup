@@ -42,7 +42,6 @@ body {
 <body>
 
 <h1 id="welcome">Welcome to your auto-backup stats</h1>
-<div id="latest"><h2>Your latest backup: </h2></div>
 <div id="data">
    
     <center><table class="data-table">
@@ -51,9 +50,11 @@ body {
             <th>timestamp</th>
             <th>action</th>
             <th>details</th>
+            <th>SHARED?</th>
             </tr>
         </thead>
         <tr>
+            <td><b>-------</b></td>
             <td><b>-------</b></td>
             <td><b>-------</b></td>
             <td><b>-------</b></td>
@@ -64,8 +65,10 @@ body {
             {% for e in entry %}
             <td>{{ e }}</td>
             {% endfor %}
+            <td><button>SHARE</button></td>
         </tr>
         <tr>
+            <td><b>-------</b></td>
             <td><b>-------</b></td>
             <td><b>-------</b></td>
             <td><b>-------</b></td>

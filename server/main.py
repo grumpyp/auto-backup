@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, send_from_directory
 import logging
 import sys
 import click
@@ -13,7 +13,8 @@ def start():
     # put your own message here
     cli.show_server_banner = lambda *x: click.echo("Your logs and backup statistics will be visualized here: http://0.0.0.0")
 
-    app = Flask(__name__)
+    app = Flask(__name__,
+                static_folder='/storage')
 
     @app.route("/")
     def logging_management():
@@ -33,5 +34,9 @@ def start():
                 pass
         return render_template('index.html', data=data)
 
-    
+    @app.route("/file/<path:filename>")
+    def serve_file(filename):
+        print(filename)
+        return send_from_directory('storage', filename, as_attachment=True)
+
     app.run(host='0.0.0.0', port='5000')
