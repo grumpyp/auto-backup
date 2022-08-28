@@ -4,6 +4,7 @@
 # storage
 .DS_Store
 temp_storage/
+/server/storage
 
 # logs
 .log
