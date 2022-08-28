@@ -17,6 +17,18 @@ You'll get this f.e. from the URL of the folder which could look like:
 `https://drive.google.com/drive/folders/1CXyv3332kkkKKeD9lZFQlMhzdvdZZo` which results in `1CXyv3332kkkKKeD9lZFQlMhzdvdZZo`
 
 
+### Ngrok
+
+We are implementing a server to share files and make the backup-management which uses a `flask` server globally accessible.
+Right now we are trying to work with `ngrok`.
+
+#### Setup
+
+1. Install `ngrok`: https://ngrok.com/download
+2. Add your auth-token by executing in the terminal `ngrok config add-authtoken <your-token>`
+
+You can also just commend out line 138 in main.py `expose = Thread(target=ngrok).start()`
+
 ## Usage
 
 You can do backups with the following commands
