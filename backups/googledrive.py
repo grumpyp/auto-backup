@@ -15,7 +15,9 @@ class Googledrive():
         self.parent_folder = settings.GOOGLEDRIVE_FOLDER
         self.creds = ServiceAccountCredentials.from_json_keyfile_name(settings.GOOGLEDRIVE_API)
         self.time = datetime.datetime.now()
-        logging.basicConfig(filename='logs.log', filemode='a+', format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO,
+        logging.basicConfig(filename='logs.log', filemode='a+', format='%(asctime)s \
+                            - %(levelname)s \
+                            - %(message)s', level=logging.INFO,
                             datefmt='%d-%m-%Y %H:%M:%S')
         logging.info('Googledrive backer started')
 
@@ -38,7 +40,8 @@ class Googledrive():
             media = MediaFileUpload(self.filename)
             file = service.files().create(body=file_metadata, media_body=media,
                                           fields='id').execute()
-            logging.warning(F'File {self.filename.split("/")[1]} uploaded to Googledrive with ID: {file.get("id")}')
+            logging.warning(F'File {self.filename.split("/")[1]} uploaded to Googledrive with ID: \
+                            {file.get("id")}')
 
         except HttpError as error:
             logging.error(F'An error occurred: {error}')
