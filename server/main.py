@@ -15,7 +15,7 @@ def start():
 
     # put your own message here
     cli.show_server_banner = lambda *x: click.echo("Your logs and backup statistics will \
-                                                   be visualized here: http://0.0.0.0")
+                                                   be visualized here: http://0.0.0.0:5000")
 
     app = Flask(__name__)
 
@@ -24,7 +24,7 @@ def start():
         data = {}
         with open('./logs.log', 'r+') as logs:
             for n, line in enumerate(logs.readlines()):
-                timestamp, status, msg = line.split(' - ')[0], line.split(' - ')[1],
+                timestamp, status, msg = line.split(' - ')[0], line.split(' - ')[1], \
                 line.split(' - ')[2]
                 if status == 'WARNING':
                     if "Googledrive" in msg:

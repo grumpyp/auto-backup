@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
 <script src="{{url_for('static', filename='main.js')}}"></script>
+</head>
+
 {{url_for('static', filename='main.js')}}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,9 +68,9 @@ body {
         {% for entry in  data.values() %}
         <tr>
             {% for e in entry %}
-            <td>{{ e }}</td>
+            <td value="{{ e }}">{{ e }}</td>
             {% endfor %}
-            <td><button>SHARE</button></td>
+            <td><button data-row='{{ entry }}' onclick='share("{{ entry }}")'>SHARE</button></td>
         </tr>
         <tr>
             <td><b>-------</b></td>
