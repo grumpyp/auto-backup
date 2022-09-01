@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/Users/patrickgerard/Documents/GitHub/auto-backup')
 import settings
 import logging
 import datetime
@@ -12,7 +10,9 @@ class Ftp():
         self.filename = filename
         self.uploadpath = uploadpath
         self.time = datetime.datetime.now()
-        logging.basicConfig(filename='logs.log', filemode='a+', format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO,
+        logging.basicConfig(filename='logs.log', filemode='a+', format='%(asctime)s \
+                            - %(levelname)s \
+                            - %(message)s', level=logging.INFO,
                             datefmt='%d-%m-%Y %H:%M:%S')
         try:
             self.connection = FTP(host=settings.FTP_URL + settings.FTP_PORT)
@@ -58,6 +58,7 @@ class Ftp():
         self.connection.dir(dir_list.append)
         directories = [dir.split(" ")[-1] for dir in dir_list if dir.split(" ")[0] == "drwxr-xr-x"]
         return directories
+
 
 if __name__ == "__main__":
     ftpcon = Ftp()

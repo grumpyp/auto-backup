@@ -2,11 +2,9 @@ import argparse
 import subprocess
 import os
 from threading import Thread
-from time import sleep
 
 import cronjobs
 from backups import googledrive, ftp
-
 
 
 def upload_single(working_dir: str, path: str, storage: str):
@@ -52,9 +50,11 @@ def compress(working_dir: str, path: str):
     except Exception as e:
         print(e)
 
+
 def _server(c):
     from server import main
     main.start()
+
 
 def ngrok():
     subprocess.call('ngrok http 5000', shell=True)
@@ -130,8 +130,7 @@ if __name__ == "__main__":
             print("To see all logs open logs.log")
         except Exception as e:
             print(f"No logs saved: {e}")
-    
-    # current problem: when uploading another file, another Thread of expose will be started 
+    # current problem: when uploading another file, another Thread of expose will be started
     # free version is limited to 1
     # it keeps working but Exceptions show up
     serv = Thread(target=_server, args=[5]).start()
