@@ -1,8 +1,8 @@
-from encodings import utf_8
 from crontab import CronTab
 import logging
 import getpass
 import os
+
 
 class Croncontroller():
 
