@@ -14,8 +14,7 @@ def start():
     cli = sys.modules['flask.cli']
 
     # put your own message here
-    cli.show_server_banner = lambda *x: click.echo("Your logs and backup statistics will \
-                                                   be visualized here: http://0.0.0.0:5000")
+    cli.show_server_banner = lambda *x: click.echo("Your logs and backup statistics will be visualized here: http://0.0.0.0:5000")
 
     app = Flask(__name__)
 

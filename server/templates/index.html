@@ -70,6 +70,7 @@ body {
             {% for e in entry %}
             <td value="{{ e }}">{{ e }}</td>
             {% endfor %}
+            {{ entry }}
             <td><button data-row='{{ entry }}' onclick='share("{{ entry }}")'>SHARE</button></td>
         </tr>
         <tr>
