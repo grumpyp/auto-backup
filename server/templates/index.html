@@ -4,7 +4,6 @@
 <script src="{{url_for('static', filename='main.js')}}"></script>
 </head>
 
-{{url_for('static', filename='main.js')}}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -48,7 +47,7 @@ body {
 
 <h1 id="welcome">Welcome to your auto-backup stats</h1>
 <div id="data">
-   
+   <b>SHARE function doesn't work with compressed yet</b>
     <center><table class="data-table">
         <thead>
             <tr>
@@ -70,7 +69,6 @@ body {
             {% for e in entry %}
             <td value="{{ e }}">{{ e }}</td>
             {% endfor %}
-            {{ entry }}
             <td><button data-row='{{ entry }}' onclick='share("{{ entry }}")'>SHARE</button></td>
         </tr>
         <tr>

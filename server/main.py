@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 import logging
 import sys
 
@@ -22,7 +22,7 @@ def start():
     def logging_management():
         data = {}
         with open('./logs.log', 'r+') as logs:
-            for n, line in enumerate(logs.readlines()):
+            for n, line in enumerate(reversed(logs.readlines())):
                 timestamp, status, msg = line.split(' - ')[0], line.split(' - ')[1], \
                 line.split(' - ')[2]
                 if status == 'WARNING':
@@ -43,7 +43,12 @@ def start():
 
     @app.route("/share", methods=["POST"])
     def share():
+        import subprocess
         data = request.get_json(force=True)
+        path = data.get('input')
+        print(path)
+        subprocess.call(f'cp "{path}" server/storage', shell=True)
+        return data
 
 
 
