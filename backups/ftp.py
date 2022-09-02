@@ -11,7 +11,8 @@ class Ftp():
         self.uploadpath = uploadpath
         self.org_path = org_path
         self.time = datetime.datetime.now()
-        logging.basicConfig(filename='logs.log', filemode='a+', format='%(asctime)s - %(levelname)s - %(message)s', 
+        logging.basicConfig(filename='logs.log', filemode='a+',
+                            format='%(asctime)s - %(levelname)s - %(message)s',
                             level=logging.INFO, datefmt='%d-%m-%Y %H:%M:%S')
         try:
             self.connection = FTP(host=settings.FTP_URL + settings.FTP_PORT)
@@ -30,7 +31,8 @@ class Ftp():
         try:
             with open(self.filename, 'rb') as file:
                 self.connection.storbinary(f'STOR {self.filename.split("/")[1]}', file)
-                logging.warning(f'File {self.filename.split("/")[1]} from: {self.org_path} uploaded to FTP')
+                logging.warning(f'File {self.filename.split("/")[1]} from: {self.org_path} \
+                                uploaded to FTP')
 
         except Exception as e:
             logging.error(F'An error occurred: {e}')
