@@ -12,10 +12,10 @@ def upload_single(working_dir: str, path: str, storage: str):
     subprocess.call(f'cp "{path}" {working_dir}/temp_storage', shell=True)
     file = path.split('/')[-1]
     if storage == "google":
-        drive = googledrive.Googledrive("temp_storage/" + file)
+        drive = googledrive.Googledrive("temp_storage/" + file, org_path=f"{path}")
         drive.upload_basic()
     if storage == "ftp":
-        ftpstorage = ftp.Ftp("temp_storage/" + file)
+        ftpstorage = ftp.Ftp("temp_storage/" + file, org_path=f"{path}")
         ftpstorage.upload_basic()
     subprocess.call(f'rm "{working_dir}/temp_storage/{file}"', shell=True)
     print("Uploaded " + path + " to " + storage)
@@ -26,10 +26,10 @@ def upload_dir(working_dir: str, path: str, storage: str):
     for file in os.listdir(path):
         subprocess.call(f'cp "{path}/{file}" {working_dir}/temp_storage', shell=True)
         if storage == "google":
-            drive = googledrive.Googledrive("temp_storage/" + file)
+            drive = googledrive.Googledrive("temp_storage/" + file, org_path=f"{path}")
             drive.upload_basic()
         elif storage == "ftp":
-            ftpstorage = ftp.Ftp("temp_storage/" + file)
+            ftpstorage = ftp.Ftp("temp_storage/" + file, org_path=f"{path}")
             ftpstorage.upload_basic()
         subprocess.call(f'rm "{working_dir}/temp_storage/{file}"', shell=True)
         print("Uploaded " + file + " to " + storage)
@@ -134,4 +134,4 @@ if __name__ == "__main__":
     # free version is limited to 1
     # it keeps working but Exceptions show up
     serv = Thread(target=_server, args=[5]).start()
-    # expose = Thread(target=ngrok).start()
+    expose = Thread(target=ngrok).start()
