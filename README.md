@@ -48,6 +48,14 @@ to view all running cronjobs `python3 main.py --upload "/Users/foo/Documents/Sky
 
 > You can delete all cronjobs with the following command in your terminal `crontab -r`
 
+### File share
+
+Every command will open a terminal like this if line 138 not commented out:
+<img width="854" alt="image" src="https://user-images.githubusercontent.com/75830792/188237471-3d2cd81d-77f9-4b4a-99ac-8fe3dc470fbd.png">
+
+So you'll be able to access the server locally but also in the WWW. Clicking on the share button will open a popup with the link to the desired file. This file can be spread to your collegues or people you want to share files/backups. The files are safed in `/server/storage` and will be available as soon as the software runs. If you delete it, it will be deleted globally.
+
+
 ## Terminal usage
 
 As there is no official pypi package yet, you can add an alias to your `shell`.
@@ -93,6 +101,6 @@ Fork it and create a PR.
 - [x]  create bash script to compress directories or files
 - [ ]  ~command to create~, edit a cronjob (auto-backup)
 - [ ]  different backups like dropbox, Applecloud, Onedrive,..
-- [ ]  Return a link to send the link to other people to easily download the file / dir which got uploaded
+- [x]  Return a link to send the link to other people to easily download the file / dir which got uploaded
 - [ ]  Create whole management tool for all backups f.e. with Flask (WIP)
 - [ ]  You have a good future idea? -> Create an issue!
