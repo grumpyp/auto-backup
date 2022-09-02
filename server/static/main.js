@@ -15,7 +15,7 @@
             console.log("sent");
         };
         r.send(JSON.stringify({"input": match[1]}));
-        alert(`Your file will be available here: 0.0.0.0:5000/file/${matchFile[1]}`)
+        alert(`Your file will be available here: ${window.location.href}file/${matchFile[1]}`)
 
     }
 
