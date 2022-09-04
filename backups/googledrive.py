@@ -30,8 +30,13 @@ class Googledrive():
         TODO(developer) - See https://developers.google.com/identity
         for guides on implementing OAuth2 for the application.
         """
+        
+        import socket
 
         try:
+            # prevent timeout on bigger batch 
+            # https://github.com/googleapis/google-api-python-client/issues/632
+            socket.setdefaulttimeout(600)
             # create drive api client
             service = build('drive', 'v3', credentials=self.creds)
 
