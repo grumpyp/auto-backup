@@ -9,7 +9,8 @@ from backups import googledrive, ftp
 
 def upload_single(working_dir: str, path: str, storage: str):
     """move file to upload, upload and delete"""
-    subprocess.call(f'cp "{path}" {working_dir}/temp_storage', shell=True)
+    print(['cp',f'{path} ', f'{working_dir}/temp_storage'])
+    subprocess.call(['cp',f'{path}', f'{working_dir}/temp_storage'])
     file = path.split('/')[-1]
     if storage == "google":
         drive = googledrive.Googledrive("temp_storage/" + file, org_path=f"{path}")
@@ -17,21 +18,21 @@ def upload_single(working_dir: str, path: str, storage: str):
     if storage == "ftp":
         ftpstorage = ftp.Ftp("temp_storage/" + file, org_path=f"{path}")
         ftpstorage.upload_basic()
-    subprocess.call(f'rm "{working_dir}/temp_storage/{file}"', shell=True)
+    subprocess.call(['rm', f'{working_dir}/temp_storage/{file}'])
     print("Uploaded " + path + " to " + storage)
     return
 
 
 def upload_dir(working_dir: str, path: str, storage: str):
     for file in os.listdir(path):
-        subprocess.call(f'cp "{path}/{file}" {working_dir}/temp_storage', shell=True)
+        subprocess.call(['cp', f'{path}/{file}', f'{working_dir}/temp_storage'])
         if storage == "google":
             drive = googledrive.Googledrive("temp_storage/" + file, org_path=f"{path}")
             drive.upload_basic()
         elif storage == "ftp":
             ftpstorage = ftp.Ftp("temp_storage/" + file, org_path=f"{path}")
             ftpstorage.upload_basic()
-        subprocess.call(f'rm "{working_dir}/temp_storage/{file}"', shell=True)
+        subprocess.call(['rm', f'{working_dir}/temp_storage/{file}'])
         print("Uploaded " + file + " to " + storage)
     return
 
